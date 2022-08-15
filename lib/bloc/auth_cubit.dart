@@ -64,6 +64,8 @@ class AuthCubit extends Cubit<AuthState> {
         "email": email,
       });
 
+      credential.user!.updateDisplayName(username);
+
       emit(const AuthSignedUp());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -81,5 +83,9 @@ class AuthCubit extends Cubit<AuthState> {
       }
       emit(AuthFailure(message: errorMessage));
     }
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }
