@@ -20,7 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      final user = credential.user!;
+      // final user = credential.user!;
 
       emit(const AuthLogin());
     } on FirebaseAuthException catch (e) {
@@ -43,7 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> signUp({
     required String email,
-    required String username,
+    required String userName,
     required String password,
   }) async {
     emit(const AuthLoading());
@@ -60,11 +60,11 @@ class AuthCubit extends Cubit<AuthState> {
           .doc(credential.user!.uid)
           .set({
         "userId": credential.user!.uid,
-        "username": username,
+        "userName": userName,
         "email": email,
       });
 
-      credential.user!.updateDisplayName(username);
+      credential.user!.updateDisplayName(userName);
 
       emit(const AuthSignedUp());
     } on FirebaseAuthException catch (e) {

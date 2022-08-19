@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_media_app/bloc/auth_cubit.dart';
 import 'package:social_media_app/screens/log_in_screen.dart';
-import 'package:social_media_app/screens/post_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String id = "sign-up screen";
@@ -50,7 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     context
         .read<AuthCubit>()
-        .signUp(email: _email, username: _username, password: _password);
+        .signUp(email: _email, userName: _username, password: _password);
   }
 
   @override
@@ -61,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (prevState, currentState) {
             if (currentState is AuthSignedUp) {
-              Navigator.of(context).pushReplacementNamed(PostScreen.id);
+              // Navigator.of(context).pushReplacementNamed(PostScreen.id);
             }
             if (currentState is AuthFailure) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -55,7 +55,7 @@ class _LogInScreenState extends State<LogInScreen> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (prevState, currentState) {
             if (currentState is AuthLogin) {
-              Navigator.of(context).pushReplacementNamed(PostScreen.id);
+              // Navigator.of(context).pushReplacementNamed(PostScreen.id);
             }
             if (currentState is AuthFailure) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
